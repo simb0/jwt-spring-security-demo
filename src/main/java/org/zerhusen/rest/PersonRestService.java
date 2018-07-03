@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.zerhusen.exception.ValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,11 @@ public class PersonRestService {
         persons = new ArrayList<>();
         persons.add(new Person("Hello", "World"));
         persons.add(new Person("Foo", "Bar"));
+    }
+
+    @RequestMapping(path = "/persons/exception", method = RequestMethod.GET)
+    public static List<Person> getPersonsException() {
+        throw new ValidationException("Your input was wrong... maybe.");
     }
 
     @RequestMapping(path = "/persons", method = RequestMethod.GET)
